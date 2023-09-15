@@ -43,3 +43,24 @@ Descripcion corta de cada una de las variables.
     Score Scaled: Un puntaje escalado que combina varios de los indicadores anteriores para proporcionar una puntuación general que se utiliza para clasificar las universidades.
 
 Estos indicadores se utilizan en conjunto para evaluar y clasificar a las universidades en el QS World University Rankings, proporcionando una visión general del rendimiento de cada institución en diversas áreas clave.
+
+
+En el NoteBook .ipynb se encuentra el codigo de analisis del proyecto, el cual se tratara de un clasificador
+de K-means para las universidades en el mundo, contando con 16  caracteristicas numericas explciadas con anterioridad
+y data de aproximadamente 1500 universidades, se intentara crear un modelo de clustering que agrupe de acuerdo al nivel
+de rendimiento de la universidad, al contener este dataset universidades unicamente dentro de las 1500 mejores del mundo
+este agrupamiento sera por Excelente, Muy bueno, bueno, promedio.
+
+Ademas de esto se crea un modelo de RD de clasificacion ordenada que busque estimar el rank de la universidad de acuerdo
+con los 8 scores que nos proporciona el dataset.
+
+Como extra, se agrego un analisis con respecto a las universidades mexicanas dentro del dataset y como estas se ven en comparativa
+con univesidades de primera linea, como lo seria MIT, Harvard o Stanford.
+
+El notebook se encuentra dividido por secciones que facilitan el moverse a traves del codigo
+las cuales se separan en
+Carga de datos
+Limpieza y verificacion de correlaciones
+Seccion de Graficacion
+Creacion de modelo de RF
+Analisis respecto a mexico
