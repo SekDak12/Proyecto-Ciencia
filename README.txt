@@ -58,9 +58,85 @@ Como extra, se agrego un analisis con respecto a las universidades mexicanas den
 con univesidades de primera linea, como lo seria MIT, Harvard o Stanford.
 
 El notebook se encuentra dividido por secciones que facilitan el moverse a traves del codigo
-las cuales se separan en
-Carga de datos
-Limpieza y verificacion de correlaciones
-Seccion de Graficacion
-Creacion de modelo de RF
-Analisis respecto a mexico
+cuales se separan en
+
+
+/////Carga de datos.
+
+Descarga automatica del data set 2023 QS.csv de GitHub mediante os y wget/
+
+////Limpieza y verificacion de correlaciones.
+
+Primeras limpiezas con ideas de que hacer con el dataset y unos problemas que tenmia en la cuestion de los ranks por los score
+
+
+////Limpieza nueva.
+
+Limpieza mas completa, donde se considero eliminar los ranks de score y reemplazar con media de la distribucion los valores NaN, dbido a que estos son por falta de posiblidad de
+recabar la informacion por parte de la institucion QS.
+
+-Se eliminana las variablesd que estan muy correlacionadas como lo serian los ranks de los respectivos score con la funcion drop.
+-Se transforman los objetos a puntos flotantes, para esto es necesrio reemplaazr aquellos - del score scaled.
+-Se verifica la estadistica general del dataframe
+
+////Seccion de Graficacion.
+
+-Generamos el grafico de la matriz de correlacion de las caracteristicas
+-Generamos una matriz de diagramas de dispersion de las variables, para analizar posibles comportamientos y dependencias.
+
+
+////Creador de modelo de regresion logistica para solucion de problemas con # el Score Scaled.
+
+Debido a que buscamos generar un modelo de clustering basado en Support Vector Machine, ocupamos basarnos en algo para nuestro clustering, decidiendome por el score scaled, pero presentand
+un problema, mucha de mi data no contaba con este parametro, asi que entrene un modelo de regresion lineal para estimar este parametro en el resto de mis universidades aunque este parametro 
+fuese bajo para asi poder clasificarlas en un intervalo.
+
+
+-Se generan dos subdataframes, en los cuales dividimos las variables regresoras y la variable objetivo. X, y
+-Generamos divisiones de estos subdates para testing y training del modelo
+-Se generaron dos posibles modelos
+
+		-Primero un modelo sencillo de Arboles de decision como regresor algortimo CART
+		 entrenandol ocon una profundidad maxima de 12 hojas 
+
+		-Segundo fue un modelo igual de arbol de decision, solo que este fue entrenado m
+		 mediante un grid para la busqueda de los parametros mas eficientes, esto porque 
+		 buscaba estimar incluso score scaleds muy cercanos al 0
+		 esto genera un costo mucho mayor computacionalmente.
+-Se agrega a mi dataframe limpiado dfclean mi nueva caracteristica score scaled 2.0, la cual aunque
+ aun hay universidades con este parametro en 0, es debido a que su puntaje es despreciable.
+///Analisis de Maquinas de vectores de soporte.
+
+Para la maquina de vectores soporte se creo una clasificacion basada en el score sclaed 2.0 que fue
+el parametro estimado en mi regresion lineal con arboles de decision, para esto se definnieron los
+siguientes intervalos con etiquetas.
+
+intervalos = [0, 20, 50, 80, 100]  # Define tus intervalos según tus criterios
+etiquetas = ['malo', 'regular', 'bueno', 'excelente']  # Define las etiquetas para cada intervalo
+
+y se entreno un modelo de maquinas vectores de soporte con un kernel lineal en este caso. \\
+Generando una precision de 0.97% de acuerdo a mi subset de testing, y  con el siguiente reporte detallado
+
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+           0       0.95      0.91      0.93        22
+           1       0.67      0.80      0.73         5
+           2       0.00      0.00      0.00         0
+           3       0.99      0.99      0.99        75
+           4       0.99      0.99      0.99       183
+
+    accuracy                           0.98       285
+   macro avg       0.72      0.74      0.73       285
+weighted avg       0.98      0.98      0.98       285
+
+Matriz de confusión:
+[[ 20   2   0   0   0]
+ [  1   4   0   0   0]
+ [  0   0   0   0   0]
+ [  0   0   0  74   1]
+
+
+////Analisis respecto a mexico.
+
+Trabajo pendiente de documentar.
