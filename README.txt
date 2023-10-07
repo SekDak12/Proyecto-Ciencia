@@ -8,35 +8,35 @@ Descripcion corta de cada una de las variables.
 
     Location: La ubicación geográfica específica de la universidad, como la ciudad y el país en el que se encuentra.
 
-    AR Score (Academic Reputation Score): Este es un puntaje que mide la reputación académica de la universidad, basado en encuestas realizadas a académicos y expertos en el campo.
+1    AR Score (Academic Reputation Score): Este es un puntaje que mide la reputación académica de la universidad, basado en encuestas realizadas a académicos y expertos en el campo.
 
     AR Rank (Academic Reputation Rank): La posición de la universidad en términos de su reputación académica.
 
-    ER Score (Employer Reputation Score): Este puntaje mide la reputación de la universidad entre los empleadores y se basa en encuestas a empleadores y líderes empresariales.
+4    ER Score (Employer Reputation Score): Este puntaje mide la reputación de la universidad entre los empleadores y se basa en encuestas a empleadores y líderes empresariales.
 
     ER Rank (Employer Reputation Rank): La posición de la universidad en términos de su reputación entre los empleadores.
 
-    FSR Score (Faculty/Student Ratio Score): Este indicador evalúa la relación entre el número de profesores y el número de estudiantes en la universidad.
+6    FSR Score (Faculty/Student Ratio Score): Este indicador evalúa la relación entre el número de profesores y el número de estudiantes en la universidad.
 
     FSR Rank (Faculty/Student Ratio Rank): La posición de la universidad en términos de su relación profesor/estudiante.
 
-    CPF Score (Citations per Faculty Score): Mide la cantidad de citas de investigación por miembro del profesorado, lo que indica la influencia de la investigación de la universidad.
+5    CPF Score (Citations per Faculty Score): Mide la cantidad de citas de investigación por miembro del profesorado, lo que indica la influencia de la investigación de la universidad.
 
     CPF Rank (Citations per Faculty Rank): La posición de la universidad en términos de citas de investigación por miembro del profesorado.
 
-    IFR Score (International Faculty Ratio Score): Evalúa la proporción de profesores internacionales en la universidad.
+7    IFR Score (International Faculty Ratio Score): Evalúa la proporción de profesores internacionales en la universidad.
 
     IFR Rank (International Faculty Ratio Rank): La posición de la universidad en términos de su proporción de profesores internacionales.
 
-    ISR Score (International Student Ratio Score): Mide la proporción de estudiantes internacionales en la universidad.
+8    ISR Score (International Student Ratio Score): Mide la proporción de estudiantes internacionales en la universidad.
 
     ISR Rank (International Student Ratio Rank): La posición de la universidad en términos de su proporción de estudiantes internacionales.
 
-    IRN Score (International Research Network Score): Evalúa la colaboración de investigación internacional de la universidad.
+3    IRN Score (International Research Network Score): Evalúa la colaboración de investigación internacional de la universidad.
 
     IRN Rank (International Research Network Rank): La posición de la universidad en términos de colaboración internacional en investigación.
 
-    GER Score (Graduate Employability Rank): Mide la empleabilidad de los graduados de la universidad, basándose en las perspectivas de empleo de los graduados.
+2    GER Score (Graduate Employability Rank): Mide la empleabilidad de los graduados de la universidad, basándose en las perspectivas de empleo de los graduados.
 
     GER Rank (Graduate Employability Rank): La posición de la universidad en términos de empleabilidad de sus graduados.
 
@@ -114,6 +114,8 @@ siguientes intervalos con etiquetas.
 intervalos = [0, 20, 50, 80, 100]  # Define tus intervalos según tus criterios
 etiquetas = ['malo', 'regular', 'bueno', 'excelente']  # Define las etiquetas para cada intervalo
 
+
+"SIN SOLUCIONAR EL INCOVENIENTE DEL BAIS DE LOS DATOS EN SCORE SCALED."
 y se entreno un modelo de maquinas vectores de soporte con un kernel lineal en este caso. \\
 Generando una precision de 0.97% de acuerdo a mi subset de testing, y  con el siguiente reporte detallado
 
@@ -135,6 +137,31 @@ Matriz de confusión:
  [  1   4   0   0   0]
  [  0   0   0   0   0]
  [  0   0   0  74   1]
+
+
+"SOLUCIONADO EL PROBLEMAS CON EL BAIS MEDIANTE LA RECONFIGURACION DEL PARAMETRO DE SCORE SCALED,
+SE REDEFINIIO ESTE MISMO EN BASE UNICAMENTE A LOS PARAMETROS QUE CONOCEMOS Y SE LES ASIGNO UN PESO
+MUY SIMILAR AL VALOR DE SU COVARIANZA ENTRE SCORE SCALED Y SUS RESPECTIVAS CARACTERISTICAS."
+
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00        30
+           1       1.00      1.00      1.00         5
+           2       0.99      1.00      1.00       125
+           3       1.00      1.00      1.00       124
+           4       0.00      0.00      0.00         1
+
+    accuracy                           1.00       285
+   macro avg       0.80      0.80      0.80       285
+weighted avg       0.99      1.00      0.99       285
+
+Matriz de confusión:
+[[ 30   0   0   0   0]
+ [  0   5   0   0   0]
+ [  0   0 125   0   0]
+ [  0   0   0 124   0]
+ [  0   0   1   0   0]]
 
 
 ////Analisis respecto a mexico.
