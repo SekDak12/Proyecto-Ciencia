@@ -91,20 +91,19 @@ Debido a que buscamos generar un modelo de clustering basado en Support Vector M
 un problema, mucha de mi data no contaba con este parametro, asi que entrene un modelo de regresion lineal para estimar este parametro en el resto de mis universidades aunque este parametro 
 fuese bajo para asi poder clasificarlas en un intervalo.
 
+Mediante los valores obtenidos a traves de la matriz de covarianza de las caracteristicas y la variable objetivo para nuestro SVM, se tomo la decision de optar por una redefinicion del Score Scaled
+y reescalar este mismo valor al intervalo [0,100], mediante una funcion normalizacion
 
--Se generan dos subdataframes, en los cuales dividimos las variables regresoras y la variable objetivo. X, y
--Generamos divisiones de estos subdates para testing y training del modelo
--Se generaron dos posibles modelos
+def regresion(ar, ger, irn, er, cpf, fsr, ifr, isr):
+    # Los pesos corresponden a las correlaciones dadas en la matriz de correlacion
+    pesos = [0.89, 0.56, 0.6, 0.78, 0.68, 0.54, 0.52, 0.51]
+    puntajes = [ar, ger, irn, er, cpf, fsr, ifr, isr]
 
-		-Primero un modelo sencillo de Arboles de decision como regresor algortimo CART
-		 entrenandol ocon una profundidad maxima de 12 hojas 
+    # Multiplica cada puntaje por su respectivo peso y suma estos productos
+    return sum(peso * puntaje for peso, puntaje in zip(pesos, puntajes))
 
-		-Segundo fue un modelo igual de arbol de decision, solo que este fue entrenado m
-		 mediante un grid para la busqueda de los parametros mas eficientes, esto porque 
-		 buscaba estimar incluso score scaleds muy cercanos al 0
-		 esto genera un costo mucho mayor computacionalmente.
--Se agrega a mi dataframe limpiado dfclean mi nueva caracteristica score scaled 2.0, la cual aunque
- aun hay universidades con este parametro en 0, es debido a que su puntaje es despreciable.
+Despues de esto se lleva acabo una normalizacion basado en el valor maximo y minimo, para por ultimo llevar acabo un escalamiento del [0,100].
+Con esto solucionamos el problema de BIAS en el Score Scaled, ya que trabajaremos en base a nuestra nueva definicion de Score llamado Score scaled sigmoid
 ///Analisis de Maquinas de vectores de soporte.
 
 Para la maquina de vectores soporte se creo una clasificacion basada en el score sclaed 2.0 que fue
@@ -114,8 +113,6 @@ siguientes intervalos con etiquetas.
 intervalos = [0, 20, 50, 80, 100]  # Define tus intervalos según tus criterios
 etiquetas = ['malo', 'regular', 'bueno', 'excelente']  # Define las etiquetas para cada intervalo
 
-
-"SIN SOLUCIONAR EL INCOVENIENTE DEL BAIS DE LOS DATOS EN SCORE SCALED."
 y se entreno un modelo de maquinas vectores de soporte con un kernel lineal en este caso. \\
 Generando una precision de 0.97% de acuerdo a mi subset de testing, y  con el siguiente reporte detallado
 
