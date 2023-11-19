@@ -79,13 +79,66 @@ recabar la informacion por parte de la institucion QS.
 -Se transforman los objetos a puntos flotantes, para esto es necesrio reemplaazr aquellos - del score scaled.
 -Se verifica la estadistica general del dataframe
 
+///Seleccion de variables mas relevantes al Rank.
+
+Analisis con Sci kit learn con los estadisticos F y Chi cuadrada, ademas de utilizar el metodo de wrapper con RFE y CART para corroborar que estas variables eran las que mas informacion
+aportaban.
+
+
 ////Seccion de Graficacion.
 
 -Generamos el grafico de la matriz de correlacion de las caracteristicas
 -Generamos una matriz de diagramas de dispersion de las variables, para analizar posibles comportamientos y dependencias.
+Estas matrices de correlacion son generadas con diferentes variables seleccionadas por el Analisis de caracteristicas.
 
+//Clasificacion mediante algoritmo CART en arboles de decision.
+  *Accuracy .78*
+Utilizando las variables que se encontraron con mayor informacion en nuestro analisis de componentes, se realizo el entrenamiento de arboles de decision  basado en el criterio
+de la entropia, debido a que este en una serie de pruebas era el que nos daba un mejor rendimiento.
+ 
+Obteniendo el siguiente reporte para el arbold e decision con 3 variables:
+Precisión: 0.7859649122807018
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+           0       0.25      0.32      0.28        19
+           1       0.44      0.50      0.47         8
+           2       0.35      0.29      0.32        31
+           3       0.91      0.90      0.91       227
+
+    accuracy                           0.79       285
+   macro avg       0.49      0.50      0.49       285
+weighted avg       0.79      0.79      0.79       285
+
+Matriz de confusión:
+[[  6   2   4   7]
+ [  3   4   0   1]
+ [  8   1   9  13]
+ [  7   2  13 205]]
+
+Para dos variables:
+Precisión: 0.7403508771929824
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+           0       0.26      0.26      0.26        19
+           1       0.31      0.50      0.38         8
+           2       0.28      0.29      0.29        31
+           3       0.87      0.85      0.86       227
+
+    accuracy                           0.74       285
+   macro avg       0.43      0.48      0.45       285
+weighted avg       0.75      0.74      0.75       285
+
+Matriz de confusión:
+[[  5   1   3  10]
+ [  2   4   0   2]
+ [  4   2   9  16]
+ [  8   6  20 193]]
 
 ////Creador de modelo de regresion logistica para solucion de problemas con # el Score Scaled.
+   **OVERFITTING Accuracy de .99*
+
 
 Debido a que buscamos generar un modelo de clustering basado en Support Vector Machine, ocupamos basarnos en algo para nuestro clustering, decidiendome por el score scaled, pero presentand
 un problema, mucha de mi data no contaba con este parametro, asi que entrene un modelo de regresion lineal para estimar este parametro en el resto de mis universidades aunque este parametro 
@@ -104,6 +157,8 @@ def regresion(ar, ger, irn, er, cpf, fsr, ifr, isr):
 
 Despues de esto se lleva acabo una normalizacion basado en el valor maximo y minimo, para por ultimo llevar acabo un escalamiento del [0,100].
 Con esto solucionamos el problema de BIAS en el Score Scaled, ya que trabajaremos en base a nuestra nueva definicion de Score llamado Score scaled sigmoid
+
+
 ///Analisis de Maquinas de vectores de soporte.
 
 Para la maquina de vectores soporte se creo una clasificacion basada en el score sclaed 2.0 que fue
@@ -160,7 +215,8 @@ Matriz de confusión:
  [  0   0   0 124   0]
  [  0   0   1   0   0]]
 
+**CLARO OVERFITTING EN LA MATRIZ DE CONFUSION**
+
 
 ////Analisis respecto a mexico.
-
-Trabajo pendiente de documentar.
+**Por la cantidad ed data queda poco analisis*
