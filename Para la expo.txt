@@ -1,0 +1,68 @@
+Factores de investigacion
+cpf score, irn score
+Factores de enseñanza 
+ifr score, isr rank, fsr score, ar score
+Facotres de empleabilidad
+er score, ger score
+
+Dataset:
+Aca hare la presentacion del dataset y de la institucion que me provio de datos
+esto para platicar un poco de la calidad y fidelidad de los datos.
+
+-Presentar un pequeño analisis de distribucion de los features del dataframe
+-Platicar de los BIAS con los que cuenta este dataset.
+
+Limpieza del dataset:
+Para la limpieza de los datos empezamos con el tratamiento de los valores atipicos y valores nulos
+En este caso, lo primer que se descarto del dataset fue las columnas propias de rank
+debido a que mantenian una muy alta correlacion con su score asignado.
+
+Se busca soluciones a los BIAS con los que cuenta el dataset
+Ademas de eliminar los valores nulos tomado la decision del porque reemplazrlos en base a la estadistica
+Ademas, como se busca utilizar modelos de M.L. estmos mismos reciben unicamente datos numericos
+por lo cual se llevo acabo una codificiacion para  que todos nuestros features sean valores flotatnes o int
+
+Por ultimo verificacion de la estadistica general del dataset y que esta misma no haya sido afectada de maenra
+significativa por nuestro cambios.
+
+Seccion de graficacion:
+
+En esta seccion presentare las diferentes matrices de correlaciones del dataset y de los subsets.
+Estos subsets son seleccionados mediante el analisis de variable scon los metodos de scikit learn
+y utilizando pruebas de estadistica como F1 y chi cuadrada.
+Ademas de mostrar los diagramas de dispersion delas varibales para verificar comportamientos o deéndeicas
+
+Arboles de decision:
+
+Dentro de esta seccion muestro como hago las labels de 
+Excelente, Muy buena, mah o meno y regular basandonos en que
+las 4 clases estan equipartidas por todo el dataset.
+(Esta aseveracion es por conveniecia a l momento de entrenar los modelos.
+Debido a que de otra manera generariamos un BIAS)
+
+Ahora si, despues de esto presentar como se conttruyeron los arboles de decision
+mostrar la comparativa entre utilizar 2 u 3 variables (seleciconadas al igual 
+por scikitlearn utilizando metodos de filtrado y de wrapper)
+
+Mostrar matriz de confusion del modelo.
+
+Regresion logistica:
+
+Hacer mencion del problema que la Dr.  Isabel me hizo constar, del hehco que la regresion logistica
+intenta hacer 1 a 1, mandando la regresion logistica a solamente decir si es de la clase 1 o en su defecto 
+de alguna de las otras 3 clases, uniendo estas mismos y el porque sucede
+
+Mostrando funcion sigmoid y el como esta actuaria en situaciones de mas de 2 clases.
+
+Moostrar los resultados que dio de igual manera .
+
+Support Vector Machine:
+
+En este caso se busca mostrar la rigidez de SVM, buscar un caso donde solo SVM se ajutes de maenra adecua si es posible
+¨ Ademas, de quere dar por snetado que utilizar un modelo como SVM noes lo mas conveniente  siempre y que es
+algo dependietne de la situacion, esta conclusion la llegarea ar aiz del poco aumento de acurrency comparado con el tiempo 
+de computo que lleva SVM, incluso mediante diferentes kernels como linear, poly, etc.
+
+Redes Neuronales:
+
+Conclusiones:
